@@ -1,0 +1,21 @@
+This sample code est a Lua/C++ binding developped to be implemented on an embedded system
+(a Domotic box by Domora). The main goal was to obtain a minimum overhead.
+
+This binding was coded so that the existing classes can be exposed to Lua without any change
+and so that the registered firmware can be used the same way as NodeJS (avec modules containing
+classes, "global" functions, etc).
+
+Functionnalities : 
+
+- Register modules that contain classes, C functions and variables
+- Register classes :
+	- Public member functions, static functions, public attributes, constructors and destructor
+	- Inheritance (that work without any module related limitation)
+	- Function overloading (as Lua does not handle overload, it is necessary to modify the code
+		with std::optional (C++14))
+- Register any function with any number and type of parameters, callbacks included.
+- A Table class that allow the user to use Lua tables as a C++ type.
+- Compatibility with a JS/Lua binding develloped by Domora for a NodeJS-like interface.
+
+One test file showing several functionnality is included.
+The magic happens in lua_register.h, this is where the functions used to expose code are written.

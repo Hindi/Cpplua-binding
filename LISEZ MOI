@@ -1,0 +1,24 @@
+Cette bibliothèque est un binding C++/Lua réalisé dans le but d'être utilisé sur un système 
+embarqué (une box domotique développée par Domora). L'objectif principal a donc été d'avoir
+un overhead minimum.
+
+Le binding est réalisé de manière à ce que les classes existantes puissent être exposées au 
+Lua sans être modifiées, et que le firmware ainsi enregistré en lua puisse être utilisé de 
+la même manière que NodeJS (avec des modules, classes, méthodes "globales" au module, etc).
+
+Un fichier comprenant une partie des tests réalisés avec google test donne des exemples d'utilisations.
+lua_register.h est le fichier qui contient les fonctions qui exposent le C++ au Lua.
+
+Fonctionnalitées :
+- Enregistrement de modules contenant des classes, des fonctions C et des attributs
+- Enregistrements de classes :
+	- Fonctions membres publiques, statiques, attributs publiques, constructeurs et destructeurs
+	- Héritage (y compris entre différents modules et sans limite de niveaux)
+	- Surcharge des fonctions (nécessité de modifier la classe avec des std::optional (c++14),
+		 Lua ne gèrant pas la surcharge)
+- Enregistrement de fonctions (quelque soit le nombre et le type de paramètres, callbacks compris)
+- Une classe Table qui permet d'utiliser en C++ les tables lua (key int et string mélangées, valeur
+	de n'importe quel type, taille variable, etc) utilisable partout (y compris comme paramètre 
+	ou retour de fonctions)
+- Compatibilité avec un binding JS/Lua réalisé par Domora pour utiliser ce binding en JS comme un 
+	nodeJS simplifié.
